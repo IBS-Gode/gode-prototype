@@ -1,0 +1,60 @@
+type Query{
+#foreach($entity in $app.entities)
+    find${entity.name}(id :ID) ${entity.name}
+#end
+}
+
+type Mutation{
+#foreach($entity in $app.entities)
+save${entity.name}(entity: ${entity.name}Request): ${entity.name}
+delete${entity.name}(id: ID) : Boolean
+disable${entity.name}(id: ID) : Boolean
+validate${entity.name}(entity: ${entity.name}Request) : Boolean
+#end
+}
+
+#foreach($entity in $app.entities)
+type ${entity.name}{
+    $StringUtils.lowerCase(${entity.idField.name}) : ID
+    #foreach ($attr in ${entity.attributes})
+        #set($attrExp = $StringUtils.camelCase(${attr.name}))
+        #set($attrName = $StringUtils.lowerCase(${attr.name}))
+        #if(${attr.datatype} == "String")
+            #set($attrDatatype = "String")
+        #elseif(${attr.datatype} == "Long" || ${attr.datatype} == "Integer" || ${attr.datatype} == "BigInteger")
+            #set($attrDatatype = "Int")
+        #elseif(${attr.datatype} == "Float" || ${attr.datatype} == "Double" || ${attr.datatype} == "BigDecimal")
+            #set($attrDatatype = "Float")
+        #elseif(${attr.datatype} == "Boolean")
+            #set($attrDatatype = "Boolean")
+        #else
+            #set($attrDatatype = ${attr.datatype})
+        #end
+
+        $attrName :$attrDatatype
+
+    #end
+}
+
+input ${entity.name}Request {
+    $StringUtils.lowerCase(${entity.idField.name}) : ID
+    #foreach ($attr in ${entity.attributes})
+        #set($attrExp = $StringUtils.camelCase(${attr.name}))
+        #set($attrName = $StringUtils.lowerCase(${attr.name}))
+        #if(${attr.datatype} == "String")
+            #set($attrDatatype = "String")
+        #elseif(${attr.datatype} == "Long" || ${attr.datatype} == "Integer" || ${attr.datatype} == "BigInteger")
+            #set($attrDatatype = "Int")
+        #elseif(${attr.datatype} == "Float" || ${attr.datatype} == "Double" || ${attr.datatype} == "BigDecimal")
+            #set($attrDatatype = "Float")
+        #elseif(${attr.datatype} == "Boolean")
+            #set($attrDatatype = "Boolean")
+        #else
+            #set($attrDatatype = ${attr.datatype})
+        #end
+
+        $attrName :$attrDatatype
+
+    #end
+}
+#end

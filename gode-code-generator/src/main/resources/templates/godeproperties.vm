@@ -1,0 +1,19 @@
+#set($appName_uc = "$StringUtils.upperCase(${app.name})")
+gode.datastore=mysql
+gode.datastore.driver=com.mysql.cj.jdbc.Driver
+gode.datastore.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+gode.datastore.datasource.url=${${appName_uc}_DB}
+gode.datastore.datasource.username=${${appName_uc}_USER}
+gode.datastore.datasource.password=${${appName_uc}_PASSWD}
+gode.datastore.datasource.auto-schema-management=update
+
+server.port=8085
+
+management.endpoint.metrics.enabled=true
+management.endpoints.web.exposure.include=*
+management.endpoint.prometheus.enabled=true
+management.metrics.export.prometheus.enabled=true
+
+spring.application.name=${app.name}-v${app.version}
+spring.boot.admin.url=${admin}
+spring.boot.admin.client.url=${admin}

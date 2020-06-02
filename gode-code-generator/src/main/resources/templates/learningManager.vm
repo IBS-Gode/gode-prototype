@@ -1,0 +1,65 @@
+package org.ibs.cdx.gode.entity.service;
+
+import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
+import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.layers.DenseLayer;
+import org.deeplearning4j.nn.conf.layers.OutputLayer;
+import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.deeplearning4j.nn.weights.WeightInit;
+import org.ibs.cdx.gode.dl.LearningArgument;
+import org.ibs.cdx.gode.dl.LearningManager;
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.nd4j.linalg.activations.Activation;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.lossfunctions.LossFunctions;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+
+@Service
+public class ${entity.name}LearningManager extends LearningManager<${entity.name},String, ${entity.name}> {
+
+public ${entity.name}LearningManager() {
+super(new LearningArgument());
+}
+
+@Override
+public ${entity.name} newResult() {
+return new ${entity.name}();
+}
+
+@Override
+public Map<Integer, ${entity.name}> classifyInternal() {
+return null;
+}
+
+@Override
+public void trainingModel() {
+MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+.seed(123)
+.iterations(3000)
+.activation(Activation.TANH)
+.weightInit(WeightInit.XAVIER)
+.learningRate(0.01)
+.regularization(true).l2(1e-4)
+.list()
+.layer(0, new DenseLayer.Builder().nIn(analysedFields().size()).nOut(3).build())
+.layer(1, new DenseLayer.Builder().nIn(3).nOut(3).build())
+.layer(2,
+new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
+.activation(Activation.SOFTMAX).nIn(3).nOut(characters().size()).build())
+.backprop(true)
+.pretrain(false)
+.build();
+
+MultiLayerNetwork model = new MultiLayerNetwork(conf);
+this.args.add(LearningArgument.Default.MODEL,model);
+}
+
+@Override
+public ${entity.name} transform(INDArray slice) {
+${entity.name} entity= newResult();
+return entity;
+}
+
+}

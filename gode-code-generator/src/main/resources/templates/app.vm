@@ -1,0 +1,12 @@
+package org.ibs.cdx.gode.app;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication(scanBasePackages={"org.ibs.cdx.gode", "org.ibs.cdx.gode.entity", "org.ibs.cdx.gode.app.function"})
+public class GodeApp {
+
+public static void main(String[] args) {
+Gode.start(GodeApp.class, args);
+}
+
+}

@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.ibs.cdx</groupId>
+	<artifactId>gode</artifactId>
+	<version>0.2</version>
+	<packaging>pom</packaging>
+
+	<name>gode</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.1.RELEASE</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<commons-lang3.version>3.9</commons-lang3.version>
+		<lib.reflections.version>0.9.11</lib.reflections.version>
+		<swagger.version>2.9.2</swagger.version>
+		<lib.cc.version>4.4</lib.cc.version>
+		<dl4j.version>0.9.1</dl4j.version>
+		<servlet-api.version>4.0.1</servlet-api.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>gode-common</module>
+		<module>gode-code-generator</module>
+	</modules>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${lib.cc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.reflections</groupId>
+				<artifactId>reflections</artifactId>
+				<version>${lib.reflections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

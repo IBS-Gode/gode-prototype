@@ -1,0 +1,43 @@
+package org.ibs.cdx.gode.app.function;
+
+import io.swagger.annotations.Api;
+import org.ibs.cdx.gode.app.function.FunctionEndpoint;
+
+#foreach($entity in $app.entities)
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.ibs.cdx.gode.entity.service.${entity.name}Manager;
+#end
+
+
+import org.ibs.cdx.gode.util.ObjectTranslator;
+import org.ibs.cdx.gode.web.Request;
+import org.ibs.cdx.gode.web.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@RestController
+@FunctionEndpoint
+@Api(tags="${app.name} Function")
+public class ${app.name}Function extends FunctionalEndPoint {
+
+#foreach($entity in $app.entities)
+    #set($managerName = "$StringUtils.lowerCase(${entity.name})Manager")
+    @Autowired
+    private ${entity.name}Manager $managerName;
+#end
+
+
+public ${app.name}Function() {
+super();
+}
+
+@Override
+public void addHandlers() {
+    #foreach($entity in $app.entities)
+    #set($managerName = "$StringUtils.lowerCase(${entity.name})Manager")
+    _add("$StringUtils.lowerCase("${entity.name}Save")", ${entity.name}.class, (${entity.name} entity)->${managerName}.save(entity));
+    #end
+}
+}

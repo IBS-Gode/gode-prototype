@@ -1,0 +1,40 @@
+package org.ibs.cdx.gode.entity.gql;
+
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.ibs.cdx.gode.entity.service.${entity.name}Manager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ${entity.name}GraphManager extends GraphQueryManager<${entity.name}Manager,${entity.name},${entity.name},${entity.idField.datatype}> {
+
+@Autowired
+public ${entity.name}GraphManager(${entity.name}Manager manager) {
+super(manager);
+}
+
+public Class<${entity.name}> getEntityClass(){
+    return ${entity.name}.class;
+}
+
+public ${entity.name} save${entity.name}(${entity.name}Request entity){
+return super.save(entity);
+}
+
+public Boolean validate${entity.name}(${entity.name}Request entity){
+return super.validate(entity);
+}
+
+public ${entity.name} find${entity.name}(${entity.idField.datatype} id){
+return super.find(id);
+}
+
+public Boolean disable${entity.name}(${entity.idField.datatype} id){
+return super.disable(id);
+}
+
+public Boolean delete${entity.name}(${entity.idField.datatype} id){
+return super.delete(id);
+}
+
+}

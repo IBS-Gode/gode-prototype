@@ -1,0 +1,55 @@
+package org.ibs.cdx.gode.entity.service;
+
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.ibs.cdx.gode.entity.repo.${entity.name}Repo;
+import org.ibs.cdx.gode.entity.manager.EntityManager;
+import org.ibs.cdx.gode.exception.ClassicRuntimeException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
+@Service
+public class ${entity.name}Manager extends EntityManager<${entity.name}, ${entity.name}, ${entity.idField.datatype}, ${entity.name}Repo> {
+
+@Autowired
+public ${entity.name}Manager(${entity.name}Repo repo) {
+super(repo);
+}
+
+@Override
+protected ${entity.name} beforeSave(${entity.name} entity) {
+return entity;
+}
+
+@Override
+protected ${entity.name} afterSave(${entity.name} entity) {
+return entity;
+}
+
+@Override
+protected ${entity.name} beforeDisable(${entity.name} entity) {
+return entity;
+}
+
+@Override
+protected ${entity.name} afterDisable(${entity.name} entity) {
+return entity;
+}
+
+@Override
+protected ${entity.name} transform(${entity.name} entity) {
+return entity;
+}
+
+@Override
+public void validateStoreEntity(${entity.name} entity) throws ClassicRuntimeException {
+
+}
+
+@Override
+public void validateUserEntity(${entity.name} entity) throws ClassicRuntimeException {
+
+}
+}

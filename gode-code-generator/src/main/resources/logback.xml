@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+	<statusListener
+		class="ch.qos.logback.core.status.NopStatusListener" />
+	<property name="LOGS" value="./logs" />
+
+	<appender name="Console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<appender name="LogFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS}/gode_gen.log</file>
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+		</encoder>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily and when the file reaches 10 MegaBytes -->
+			<fileNamePattern>${LOGS}/archived/gode_gen-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>3MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+		<logger name="org.ibs" level="DEBUG" additivity="false">
+			<appender-ref ref="LogFile" />
+			<appender-ref ref="Console" />
+		</logger>
+		<root level="DEBUG">
+			<appender-ref ref="LogFile" />
+		</root>
+
+	<!-- LOG everything at INFO level -->
+
+</configuration>

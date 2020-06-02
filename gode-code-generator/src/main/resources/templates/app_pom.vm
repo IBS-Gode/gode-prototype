@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.ibs.cdx</groupId>
+    <artifactId>$StringUtils.lowerCase($app.name)</artifactId>
+    <packaging>pom</packaging>
+    <version>${app.version}</version>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.8.RELEASE</version>
+    </parent>
+    <properties>
+        <swagger.version>2.9.2</swagger.version>
+        <gode.version>0.2</gode.version>
+        <querydsl.version>4.2.1</querydsl.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <graphql.version>5.0.2</graphql.version>
+        <graphql.tools.version>5.2.4</graphql.tools.version>
+        <dl4j.version>0.9.1</dl4j.version>
+    </properties>
+    <modules>
+        #foreach($module in $app.entities)
+            <module>$StringUtils.lowerCase($module.name)</module>
+        #end
+        <module>appexe</module>
+    </modules>
+
+
+</project>

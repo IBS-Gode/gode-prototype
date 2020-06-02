@@ -1,0 +1,13 @@
+package org.ibs.cdx.gode.entity.repo;
+
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
+@Repository
+public interface ${entity.name}Repo extends StoreEntityRepo<${entity.name}, ${entity.idField.datatype}>, JpaRepository<${entity.name}, ${entity.idField.datatype}> {
+
+}

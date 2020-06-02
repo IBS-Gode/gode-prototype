@@ -1,0 +1,10 @@
+package org.ibs.cdx.gode.entity.gql;
+
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.springframework.beans.BeanUtils;
+
+
+public class ${entity.name}Request extends ${entity.name} {
+
+
+}

@@ -1,0 +1,51 @@
+#set($appbasepath=${StringUtils.lowerCase(${app.name})})
+#set($appExebasepath="${appbasepath}/appexe")
+#set($entitybasepath="${appbasepath}/${StringUtils.lowerCase(${entity.name})}")
+#set($projectPath="${parent}/${entitybasepath}/src/main/java/${project}/entity")
+#set($appPath="${parent}/${appExebasepath}/src/main/java/${project}/app")
+#set($functionPath="$appPath/function")
+#set($propertyPath="${parent}/${appExebasepath}/src/main/resources/")
+type: entityConfig
+configuration:
+  - name: pom.xml
+    path: $parent/$appbasepath
+    template: app_pom.vm
+  - name: pom.xml
+    path: $parent/$appExebasepath
+    template: appexe_pom.vm
+  - name: pom.xml
+    path: $parent/$entitybasepath
+    template: pom.vm
+  - name: ${entity.name}Controller.java
+    path: $projectPath/controller
+    template: controller.vm
+  - name: ${entity.name}.java
+    path: $projectPath/model
+    template: model.vm
+  - name: ${entity.name}Manager.java
+    path: $projectPath/service
+    template: manager.vm
+  - name: ${entity.name}LearningManager.java
+    path: $projectPath/service
+    template: learningManager.vm
+  - name: ${entity.name}GraphManager.java
+    path: $projectPath/gql
+    template: gql.vm
+  - name: ${entity.name}Request.java
+    path: $projectPath/gql
+    template: gqlRequest.vm
+  - name: ${entity.name}Repo.java
+    path: $projectPath/repo
+    template: repo.vm
+  - name: GodeApp.java
+    path: $appPath
+    template: app.vm
+  - name: ${app.name}Function.java
+    path: $functionPath
+    template: function.vm
+  - name: gode.properties
+    path: $propertyPath
+    template: godeproperties.vm
+  - name: root.graphqls
+    path: $propertyPath/graphql
+    template: graphqlroot.vm

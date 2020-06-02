@@ -1,0 +1,84 @@
+package org.ibs.cdx.gode.entity.controller;
+
+import io.swagger.annotations.Api;
+import org.ibs.cdx.gode.entity.model.${entity.name};
+import org.ibs.cdx.gode.entity.service.${entity.name}Manager;
+import org.ibs.cdx.gode.entity.service.${entity.name}LearningManager;
+import org.ibs.cdx.gode.web.Request;
+import org.ibs.cdx.gode.web.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import com.querydsl.core.types.Predicate;
+import org.ibs.cdx.gode.pagination.PageContext;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
+
+@Endpoint
+@Api(tags= {"${entity.name}"})
+public class ${entity.name}Controller extends EntityEndpoint<${entity.name}, ${entity.name}Manager,${entity.name}LearningManager,${entity.idField.datatype}> {
+
+@Autowired
+public ${entity.name}Controller(${entity.name}Manager manager, ${entity.name}LearningManager learningManager) {
+super(manager, learningManager);
+}
+
+@PostMapping(path="/${StringUtils.lowerCase(${entity.name})}/save")
+@ApiOperation("Save operation")
+public Response<${entity.name}> save(@RequestBody Request<${entity.name}> request) {
+    return super.save(request);
+    }
+
+    @PostMapping(path="/${StringUtils.lowerCase(${entity.name})}/disable")
+    @ApiOperation("Disable operation")
+    public Response<Boolean> disable(@RequestBody  Request<${entity.idField.datatype}> request) {
+        return super.disable(request);
+        }
+
+        @PostMapping(path="/${StringUtils.lowerCase(${entity.name})}/delete")
+        @ApiOperation("Delete operation")
+        public Response<Boolean> delete(@RequestBody Request<${entity.idField.datatype}> request) {
+            return super.delete(request);
+            }
+
+            @GetMapping(path="/${StringUtils.lowerCase(${entity.name})}/find")
+            @ApiOperation("Id based search operation")
+            public Response<${entity.name}> find(@RequestParam ${entity.idField.datatype} id) {
+                return super.find(id);
+                }
+
+                @PostMapping(path="/${StringUtils.lowerCase(${entity.name})}/validate")
+        @ApiOperation("Validation operation")
+                public Response<Boolean> validate(@RequestBody  Request<${entity.name}> request) {
+                    return super.validate(request);
+                    }
+
+            @GetMapping(path="/${StringUtils.lowerCase(${entity.name})}/findAll")
+            @ApiOperation("Dynamic Find operation")
+            public Response<List<${entity.name}>> findAll(@QuerydslPredicate(root=${entity.name}.class) Predicate predicate, @ModelAttribute PageContext pageRequest) {
+                return super.findAll(predicate, pageRequest);
+                }
+
+            @PostMapping(path = "/${StringUtils.lowerCase(${entity.name})}/load")
+            @ApiOperation("Load training data")
+            public Response<Boolean> train(String handle, MultipartFile data) {
+                return super.train(handle, data);
+                }
+
+                @PostMapping(path = "/${StringUtils.lowerCase(${entity.name})}/classify")
+                @ApiOperation("Classify test data")
+                public Response<ModelMap> classify(String handle, MultipartFile data) {
+                    return super.classify(handle, data);
+                    }
+
+                    }
