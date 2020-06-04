@@ -57,6 +57,17 @@ public class EntityVelocityModel extends VelocityModel<EntityVelocityModel> {
         this.attributes = new HashSet<>();
     }
 
+    private String database;
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+
+
     @Override
     public String getModelType() {
         return "entity";

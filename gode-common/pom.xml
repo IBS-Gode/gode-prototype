@@ -101,6 +101,11 @@
           <artifactId>deeplearning4j-core</artifactId>
           <version>${dl4j.version}</version>
       </dependency>
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-mongodb</artifactId>
+          <version>3.0.0.RELEASE</version>
+      </dependency>
   </dependencies>
     <build>
         <plugins>

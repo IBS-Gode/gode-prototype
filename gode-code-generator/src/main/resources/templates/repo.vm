@@ -1,13 +1,22 @@
+#if($StringUtils.upperCase(${entity.database}) == "MONGO")
+    #set($springrepo = "MongoRepository")
+#else
+    #set($springrepo = "JpaRepository")
+#end
 package org.ibs.cdx.gode.entity.repo;
 
 import org.ibs.cdx.gode.entity.model.${entity.name};
+#if(${springrepo} == "MongoRepository")
+import org.springframework.data.mongodb.repository.MongoRepository;
+#else
 import org.springframework.data.jpa.repository.JpaRepository;
+#end
 import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
 @Repository
-public interface ${entity.name}Repo extends StoreEntityRepo<${entity.name}, ${entity.idField.datatype}>, JpaRepository<${entity.name}, ${entity.idField.datatype}> {
+public interface ${entity.name}Repo extends StoreEntityRepo<${entity.name}, ${entity.idField.datatype}>, ${springrepo}<${entity.name}, ${entity.idField.datatype}> {
 
 }
