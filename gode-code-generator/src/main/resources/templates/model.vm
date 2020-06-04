@@ -1,6 +1,16 @@
+#if($StringUtils.upperCase(${entity.database}) == "MONGO")
+    #set($springrepo = "MongoRepository")
+#else
+    #set($springrepo = "JpaRepository")
+#end
+
 package org.ibs.cdx.gode.entity.model;
 
+#if(${springrepo} == "MongoRepository")
+import org.springframework.data.mongodb.core.mapping.Document;
+#else
 import javax.persistence.Entity;
+#end
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -16,7 +26,12 @@ import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Transient;
 
+
+#if(${springrepo} == "MongoRepository")
+@Document
+#else
 @Entity
+#end
 public class ${entity.name} extends StoreEntity<${entity.idField.datatype}> implements LearningRequired< ${entity.name},String>, Learned< ${entity.name},String>{
 
 
