@@ -7,6 +7,12 @@ gode.datastore.datasource.username=${${appName_uc}_USER}
 gode.datastore.datasource.password=${${appName_uc}_PASSWD}
 gode.datastore.datasource.auto-schema-management=update
 
+
+
+spring.data.mongodb.database=myNewDatabase
+spring.data.mongodb.repositories.enabled=true
+spring.data.mongodb.uri=mongodb://localhost/myNewDatabase
+
 server.port=8085
 
 management.endpoint.metrics.enabled=true
