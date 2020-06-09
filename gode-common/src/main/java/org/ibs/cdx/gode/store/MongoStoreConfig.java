@@ -7,9 +7,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableMongoRepositories(basePackages = "org.ibs.cdx.gode.entity.*")
@@ -17,6 +22,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan("org.ibs.cdx.gode")
 @PropertySource(value="classpath:gode.properties")
 public class MongoStoreConfig extends AbstractMongoClientConfiguration {
+
+    private List<Converter<?,?>> converters = new ArrayList<Converter<?,?>>();
 
     @Override
     public MongoClient mongoClient() {
@@ -32,5 +39,13 @@ public class MongoStoreConfig extends AbstractMongoClientConfiguration {
     @Override
     protected String getDatabaseName() {
         return "myNewDatabase";
+    }
+
+
+    @Override
+    public MongoCustomConversions customConversions(){
+        converters.add(new DateToOffsetDateTimeConverter());
+        converters.add(new OffsetDateTimeToDateConverter());
+        return new MongoCustomConversions(converters);
     }
 }
