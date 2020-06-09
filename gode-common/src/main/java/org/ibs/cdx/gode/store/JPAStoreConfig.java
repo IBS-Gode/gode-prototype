@@ -5,8 +5,7 @@ import org.ibs.cdx.gode.app.GodeBehaviour;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -22,6 +21,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@Conditional(JPAStoreEnabler.class)
 @EnableJpaRepositories(basePackages = "org.ibs.cdx.gode.entity.*")
 @ComponentScan("org.ibs.cdx.gode")
 @EntityScan("org.ibs.cdx.gode.entity.*")

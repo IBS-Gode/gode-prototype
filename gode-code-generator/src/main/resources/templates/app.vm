@@ -1,8 +1,15 @@
 package org.ibs.cdx.gode.app;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 
-@SpringBootApplication(scanBasePackages={"org.ibs.cdx.gode", "org.ibs.cdx.gode.entity", "org.ibs.cdx.gode.app.function"})
+@SpringBootApplication(scanBasePackages={"org.ibs.cdx.gode", "org.ibs.cdx.gode.entity", "org.ibs.cdx.gode.app.function"}, exclude = {
+DataSourceAutoConfiguration.class,
+DataSourceTransactionManagerAutoConfiguration.class,
+HibernateJpaAutoConfiguration.class
+})
 public class GodeApp {
 
 public static void main(String[] args) {
