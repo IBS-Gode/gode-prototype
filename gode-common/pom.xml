@@ -91,6 +91,15 @@
           <artifactId>querydsl-jpa</artifactId>
       </dependency>
       <dependency>
+          <groupId>com.querydsl</groupId>
+          <artifactId>querydsl-mongodb</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>1.6.1</version>
+      </dependency>
+      <dependency>
           <groupId>org.bitbucket.gt_tech</groupId>
           <artifactId>spring-data-querydsl-value-operators</artifactId>
           <version>4.0.0</version>
@@ -119,7 +128,8 @@
                         </goals>
                         <configuration>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
-                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                            <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>
+<!--                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>-->
                         </configuration>
                     </execution>
                 </executions>

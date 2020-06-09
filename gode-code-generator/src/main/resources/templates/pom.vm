@@ -1,3 +1,8 @@
+#if($StringUtils.upperCase(${entity.database}) == "MONGO")
+    #set($springrepo = "MongoRepository")
+#else
+    #set($springrepo = "JpaRepository")
+#end
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -68,6 +73,15 @@
             <artifactId>querydsl-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.bitbucket.gt_tech</groupId>
             <artifactId>spring-data-querydsl-value-operators</artifactId>
             <version>4.0.0</version>
@@ -97,7 +111,11 @@
                         </goals>
                         <configuration>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
+                            #if(${springrepo} == "MongoRepository")
+                            <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>
+                            #else
                             <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                            #end
                         </configuration>
                     </execution>
                 </executions>
