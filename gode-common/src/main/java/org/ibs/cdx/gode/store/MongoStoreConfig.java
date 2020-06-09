@@ -2,6 +2,8 @@ package org.ibs.cdx.gode.store;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.ibs.cdx.gode.app.GodeBehaviour;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +25,13 @@ import java.util.List;
 @PropertySource(value="classpath:gode.properties")
 public class MongoStoreConfig extends AbstractMongoClientConfiguration {
 
+    private final GodeBehaviour behaviour;
     private List<Converter<?,?>> converters = new ArrayList<Converter<?,?>>();
+
+    @Autowired
+    public MongoStoreConfig(GodeBehaviour behaviour){
+        this.behaviour = behaviour;
+    }
 
     @Override
     public MongoClient mongoClient() {
@@ -38,7 +46,7 @@ public class MongoStoreConfig extends AbstractMongoClientConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "myNewDatabase";
+        return behaviour.getProperty("spring.data.mongodb.database");
     }
 
 

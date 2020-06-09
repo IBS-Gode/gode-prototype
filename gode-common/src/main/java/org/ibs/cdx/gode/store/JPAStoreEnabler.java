@@ -8,8 +8,7 @@ public class JPAStoreEnabler  implements  Condition {
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        //return Boolean.valueOf(context.getEnvironment().getProperty("gode.datastore.jpa.enabled"));
-        return false;
+        return Boolean.valueOf(context.getEnvironment().getProperty("gode.datastore.jpa.enabled"));
     }
 
 }

@@ -24,6 +24,7 @@ import java.util.Properties;
 @Conditional(JPAStoreEnabler.class)
 @EnableJpaRepositories(basePackages = "org.ibs.cdx.gode.entity.*")
 @ComponentScan("org.ibs.cdx.gode")
+@PropertySource(value="classpath:gode.properties")
 @EntityScan("org.ibs.cdx.gode.entity.*")
 public class JPAStoreConfig {
 

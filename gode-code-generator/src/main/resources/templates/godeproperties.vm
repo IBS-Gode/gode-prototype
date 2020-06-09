@@ -6,6 +6,7 @@ gode.datastore.datasource.url=${${appName_uc}_DB}
 gode.datastore.datasource.username=${${appName_uc}_USER}
 gode.datastore.datasource.password=${${appName_uc}_PASSWD}
 gode.datastore.datasource.auto-schema-management=update
+gode.datastore.jpa.enabled=false
 
 
 
